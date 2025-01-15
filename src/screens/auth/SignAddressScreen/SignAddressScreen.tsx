@@ -6,15 +6,37 @@ import { RootStackParamList } from '../../../routes/Routes';
 import { Icon } from '../../../components/Icon/Icon';
 import { TextInput } from '../../../components/TextInput/TextInput';
 import { Button } from '../../../components/Button/Button';
+import { useForm } from 'react-hook-form';
+import { FormTextInput } from '../../../components/FormInput/FormTextInput';
+import { useResetNavigationSuccess } from '../../../hooks/useResetNavigationSuccess';
 
 type StackProps = NativeStackScreenProps<
   RootStackParamList,
   'SignAddressScreen'
 >;
 
+type SignAddressScreenFormType = {
+  address: string;
+  neighbor: string;
+  uf: string;
+  cep: string;
+};
+
 export function SignAddressScreen({ navigation }: StackProps) {
-  function navigateToSuccessScreen() {
-    navigation.navigate('SuccessScreen', {
+  const { reset } = useResetNavigationSuccess();
+  const { control, handleSubmit, formState } =
+    useForm<SignAddressScreenFormType>({
+      defaultValues: {
+        address: '',
+        neighbor: '',
+        uf: '',
+        cep: '',
+      },
+      mode: 'onChange',
+    });
+
+  function onSubmit(data: SignAddressScreenFormType) {
+    reset({
       icon: {
         name: 'checkRound',
       },
@@ -29,13 +51,44 @@ export function SignAddressScreen({ navigation }: StackProps) {
         Informe seu endereço.
       </Text>
 
-      <TextInput label="Endereço" boxProps={{ mb: 's23' }} />
+      <FormTextInput
+        control={control}
+        name="address"
+        rules={{ required: 'Campo obrigatório' }}
+        label="Endereço"
+        boxProps={{ mb: 's23' }}
+      />
 
-      <TextInput label="Bairro" boxProps={{ mb: 's23' }} />
-      <TextInput label="UF" boxProps={{ mb: 's23' }} />
-      <TextInput label="CEP" boxProps={{ mb: 's40' }} keyboardType="numeric" />
+      <FormTextInput
+        control={control}
+        name="neighbor"
+        rules={{ required: 'Campo obrigatório' }}
+        label="Bairro"
+        boxProps={{ mb: 's23' }}
+      />
 
-      <Button title="Criar minha conta" onPress={navigateToSuccessScreen} />
+      <FormTextInput
+        control={control}
+        name="uf"
+        rules={{ required: 'Campo obrigatório' }}
+        label="UF"
+        boxProps={{ mb: 's23' }}
+      />
+
+      <FormTextInput
+        control={control}
+        name="cep"
+        rules={{ required: 'Campo obrigatório' }}
+        label="CEP"
+        keyboardType="numeric"
+        boxProps={{ mb: 's40' }}
+      />
+
+      <Button
+        title="Criar minha conta"
+        onPress={handleSubmit(onSubmit)}
+        disabled={!formState.isValid}
+      />
     </Screen>
   );
 }

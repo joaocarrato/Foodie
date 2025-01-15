@@ -9,7 +9,7 @@ import { Button } from '../../../components/Button/Button';
 
 type StackProps = NativeStackScreenProps<RootStackParamList, 'SuccessScreen'>;
 
-export function SuccessScreen({ route }: StackProps) {
+export function SuccessScreen({ route, navigation }: StackProps) {
   return (
     <Screen>
       <Box my="s24">
@@ -22,7 +22,7 @@ export function SuccessScreen({ route }: StackProps) {
 
       <Text mt="s16">{route.params.description}</Text>
 
-      <Button title="Voltar ao início" mt="s40" />
+      <Button title="Voltar ao início" mt="s40" onPress={navigation.goBack} />
     </Screen>
   );
 }
