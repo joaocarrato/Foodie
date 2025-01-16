@@ -2,27 +2,20 @@ import React from 'react';
 import { Screen } from '../../../components/Screen/Screen';
 import { Text } from '../../../components/Text/Text';
 import { Icon } from '../../../components/Icon/Icon';
-import { TextInput } from '../../../components/TextInput/TextInput';
-import { PasswordInput } from '../../../components/PasswordInput/PasswordInput';
 import { Button } from '../../../components/Button/Button';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../routes/Routes';
 import { useForm } from 'react-hook-form';
 import { FormTextInput } from '../../../components/FormInput/FormTextInput';
-import { EMAIL_REGEX } from '../../../components/FormInput/regex';
 import { FormPasswordInput } from '../../../components/FormInput/FormPasswordInput';
+import { signUpSchema, SignUpSchema } from './signUpSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 type StackProps = NativeStackScreenProps<RootStackParamList, 'SignUpScreen'>;
 
-type SignUpScreenFormType = {
-  fullName: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
-
 export function SignUpScreen({ navigation }: StackProps) {
-  const { control, handleSubmit, formState } = useForm<SignUpScreenFormType>({
+  const { control, handleSubmit, formState } = useForm<SignUpSchema>({
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
       fullName: '',
       email: '',
@@ -32,7 +25,7 @@ export function SignUpScreen({ navigation }: StackProps) {
     mode: 'onChange',
   });
 
-  function onSubmit(data: SignUpScreenFormType) {
+  function onSubmit(data: SignUpSchema) {
     navigation.navigate('SignAddressScreen');
   }
 
@@ -45,9 +38,7 @@ export function SignUpScreen({ navigation }: StackProps) {
       <FormTextInput
         control={control}
         name="fullName"
-        rules={{
-          required: 'Nome completo é obrigatório',
-        }}
+        autoCapitalize="words"
         label="Nome Completo"
         boxProps={{ mb: 's23' }}
       />
@@ -55,12 +46,6 @@ export function SignUpScreen({ navigation }: StackProps) {
       <FormTextInput
         control={control}
         name="email"
-        rules={{
-          pattern: {
-            value: EMAIL_REGEX,
-            message: 'E-mail obrigatório',
-          },
-        }}
         label="E-mail"
         boxProps={{ mb: 's23' }}
       />
@@ -68,12 +53,6 @@ export function SignUpScreen({ navigation }: StackProps) {
       <FormPasswordInput
         control={control}
         name="password"
-        rules={{
-          minLength: {
-            value: 8,
-            message: 'Senha deve conter no mínimo 8 caracteres',
-          },
-        }}
         label="Escolha uma senha"
         boxProps={{ mb: 's23' }}
       />
@@ -81,12 +60,6 @@ export function SignUpScreen({ navigation }: StackProps) {
       <FormPasswordInput
         control={control}
         name="confirmPassword"
-        rules={{
-          minLength: {
-            value: 8,
-            message: 'Senha deve ser igual',
-          },
-        }}
         label="Confirme a senha"
         boxProps={{ mb: 's40' }}
       />

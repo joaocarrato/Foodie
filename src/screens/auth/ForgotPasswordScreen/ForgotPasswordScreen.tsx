@@ -10,26 +10,27 @@ import { useResetNavigationSuccess } from '../../../hooks/useResetNavigationSucc
 import { useForm } from 'react-hook-form';
 import { FormTextInput } from '../../../components/FormInput/FormTextInput';
 import { EMAIL_REGEX } from '../../../components/FormInput/regex';
+import {
+  forgotPasswordSchema,
+  ForgotPasswordSchema,
+} from './forgotPasswordSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 type StackProps = NativeStackScreenProps<
   RootStackParamList,
   'ForgotPasswordScreen'
 >;
 
-type ForgotPasswordScreenFormType = {
-  email: string;
-};
-
 export function ForgotPasswordScreen({ navigation }: StackProps) {
   const { reset } = useResetNavigationSuccess();
-  const { control, handleSubmit, formState } =
-    useForm<ForgotPasswordScreenFormType>({
-      defaultValues: {
-        email: '',
-      },
-      mode: 'onChange',
-    });
-  function onSubmit(data: ForgotPasswordScreenFormType) {
+  const { control, handleSubmit, formState } = useForm<ForgotPasswordSchema>({
+    resolver: zodResolver(forgotPasswordSchema),
+    defaultValues: {
+      email: '',
+    },
+    mode: 'onChange',
+  });
+  function onSubmit(data: ForgotPasswordSchema) {
     reset({
       icon: {
         name: 'messageRound',
@@ -49,12 +50,6 @@ export function ForgotPasswordScreen({ navigation }: StackProps) {
       <FormTextInput
         control={control}
         name="email"
-        rules={{
-          pattern: {
-            value: EMAIL_REGEX,
-            message: 'E-mail inválido',
-          },
-        }}
         label="Digite seu e-mail"
         boxProps={{ mb: 's36' }}
       />

@@ -3,24 +3,20 @@ import { Screen } from '../../../components/Screen/Screen';
 import { Box } from '../../../components/Box/Box';
 import { Icon } from '../../../components/Icon/Icon';
 import { Text } from '../../../components/Text/Text';
-import { TextInput } from '../../../components/TextInput/TextInput';
-import { PasswordInput } from '../../../components/PasswordInput/PasswordInput';
 import { Button } from '../../../components/Button/Button';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../routes/Routes';
-import { Control, Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { FormTextInput } from '../../../components/FormInput/FormTextInput';
 import { FormPasswordInput } from '../../../components/FormInput/FormPasswordInput';
-import { EMAIL_REGEX } from '../../../components/FormInput/regex';
+import { loginSchema, LoginSchema } from './loginSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 type StackProps = NativeStackScreenProps<RootStackParamList, 'LoginScreen'>;
 
-export type LoginScreenFormType = {
-  email: string;
-  password: string;
-};
 export function LoginScreen({ navigation }: StackProps) {
-  const { control, handleSubmit, formState } = useForm<LoginScreenFormType>({
+  const { control, handleSubmit, formState } = useForm<LoginSchema>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: '',
       password: '',
@@ -28,7 +24,9 @@ export function LoginScreen({ navigation }: StackProps) {
     mode: 'onChange',
   });
 
-  function onSubmit(data: LoginScreenFormType) {}
+  function onSubmit(data: LoginSchema) {
+    console.log(data);
+  }
 
   function navigateToSignUpScreen() {
     navigation.navigate('SignUpScreen');
@@ -48,12 +46,6 @@ export function LoginScreen({ navigation }: StackProps) {
       <FormTextInput
         control={control}
         name="email"
-        rules={{
-          pattern: {
-            value: EMAIL_REGEX,
-            message: 'E-mail inválido',
-          },
-        }}
         label="E-mail"
         boxProps={{ mb: 's23' }}
       />
@@ -61,12 +53,6 @@ export function LoginScreen({ navigation }: StackProps) {
       <FormPasswordInput
         control={control}
         name="password"
-        rules={{
-          minLength: {
-            value: 8,
-            message: 'Senha deve conter no mínimo 8 caracteres',
-          },
-        }}
         label="Senha"
         boxProps={{ mb: 's8' }}
       />

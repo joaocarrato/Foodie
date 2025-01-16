@@ -55,7 +55,11 @@ export function TextInput({
           {rightComponent && <Box mr="s10">{rightComponent}</Box>}
         </Box>
         {errorMessage && (
-          <Text textColor="red" preset="paragraphMedium" semiBold mt="s4">
+          <Text
+            textColor="red"
+            preset="paragraphMedium"
+            style={{ fontWeight: 500 }}
+            mt="s4">
             {errorMessage}
           </Text>
         )}

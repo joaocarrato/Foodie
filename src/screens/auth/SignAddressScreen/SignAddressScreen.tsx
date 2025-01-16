@@ -4,38 +4,33 @@ import { Text } from '../../../components/Text/Text';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../routes/Routes';
 import { Icon } from '../../../components/Icon/Icon';
-import { TextInput } from '../../../components/TextInput/TextInput';
 import { Button } from '../../../components/Button/Button';
 import { useForm } from 'react-hook-form';
 import { FormTextInput } from '../../../components/FormInput/FormTextInput';
 import { useResetNavigationSuccess } from '../../../hooks/useResetNavigationSuccess';
+import { signAddressSchema, SignAddressSchema } from './signAddressSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 type StackProps = NativeStackScreenProps<
   RootStackParamList,
   'SignAddressScreen'
 >;
 
-type SignAddressScreenFormType = {
-  address: string;
-  neighbor: string;
-  uf: string;
-  cep: string;
-};
-
 export function SignAddressScreen({ navigation }: StackProps) {
   const { reset } = useResetNavigationSuccess();
-  const { control, handleSubmit, formState } =
-    useForm<SignAddressScreenFormType>({
-      defaultValues: {
-        address: '',
-        neighbor: '',
-        uf: '',
-        cep: '',
-      },
-      mode: 'onChange',
-    });
+  const { control, handleSubmit, formState } = useForm<SignAddressSchema>({
+    resolver: zodResolver(signAddressSchema),
+    defaultValues: {
+      address: '',
+      neighbor: '',
+      uf: '',
+      cep: '',
+    },
+    mode: 'onChange',
+  });
 
-  function onSubmit(data: SignAddressScreenFormType) {
+  function onSubmit(data: SignAddressSchema) {
+    console.log(data);
     reset({
       icon: {
         name: 'checkRound',
@@ -54,7 +49,6 @@ export function SignAddressScreen({ navigation }: StackProps) {
       <FormTextInput
         control={control}
         name="address"
-        rules={{ required: 'Campo obrigatório' }}
         label="Endereço"
         boxProps={{ mb: 's23' }}
       />
@@ -62,7 +56,6 @@ export function SignAddressScreen({ navigation }: StackProps) {
       <FormTextInput
         control={control}
         name="neighbor"
-        rules={{ required: 'Campo obrigatório' }}
         label="Bairro"
         boxProps={{ mb: 's23' }}
       />
@@ -70,7 +63,6 @@ export function SignAddressScreen({ navigation }: StackProps) {
       <FormTextInput
         control={control}
         name="uf"
-        rules={{ required: 'Campo obrigatório' }}
         label="UF"
         boxProps={{ mb: 's23' }}
       />
@@ -78,7 +70,6 @@ export function SignAddressScreen({ navigation }: StackProps) {
       <FormTextInput
         control={control}
         name="cep"
-        rules={{ required: 'Campo obrigatório' }}
         label="CEP"
         keyboardType="numeric"
         boxProps={{ mb: 's40' }}
