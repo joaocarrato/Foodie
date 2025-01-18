@@ -30,19 +30,16 @@ const buttonPreset: Record<ButtonPresets, ButtonUI> = {
 interface ButtonProps extends TouchableOpacityBoxProps {
   title: string;
   loading?: boolean;
-  preset?: ButtonPresets;
   disabled?: boolean;
 }
 
 export function Button({
   title,
-  preset = 'primary',
   loading,
   disabled = false,
   ...buttonProps
 }: ButtonProps) {
-  const buttonPresets =
-    buttonPreset[(preset = disabled ? 'secondary' : 'primary')];
+  const buttonPresets = buttonPreset[disabled ? 'secondary' : 'primary'];
 
   return (
     <TouchableOpacityBox

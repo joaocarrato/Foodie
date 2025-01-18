@@ -1,23 +1,8 @@
 import React from 'react';
 
-import Svg, {
-  Path,
-  G,
-  Rect,
-  Defs,
-  Pattern,
-  Use,
-  Image,
-} from 'react-native-svg';
+import Svg, { Rect, Defs, Pattern, Use, Image } from 'react-native-svg';
 
-import { ThemeColors } from '../../theme/theme';
-
-interface IconProps {
-  size?: number;
-  color?: string;
-}
-
-export function LogoIcon({ size, color }: IconProps) {
+export function LogoIcon() {
   return (
     <Svg width="173" height="52" viewBox="0 0 173 52" fill="none">
       <Rect width="173" height="51.7261" fill="url(#pattern0_1_17)" />

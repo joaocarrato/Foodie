@@ -4,6 +4,7 @@ import Svg, { Rect, Defs, Pattern, Use, Image } from 'react-native-svg';
 
 import { IconBase } from '../../components/Icon/Icon';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function BackIcon({ size = 32, color = 'black' }: IconBase) {
   return (
     <Svg width={size} height={size} viewBox="0 0 32 32" fill="none">
