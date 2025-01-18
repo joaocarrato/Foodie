@@ -4,17 +4,16 @@ import { Box } from '../../../components/Box/Box';
 import { Icon } from '../../../components/Icon/Icon';
 import { Text } from '../../../components/Text/Text';
 import { Button } from '../../../components/Button/Button';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../routes/Routes';
 import { useForm } from 'react-hook-form';
 import { FormTextInput } from '../../../components/FormInput/FormTextInput';
 import { FormPasswordInput } from '../../../components/FormInput/FormPasswordInput';
 import { loginSchema, LoginSchema } from './loginSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { AuthStackScreenProps } from '../../../routes/navigationType';
 
-type StackProps = NativeStackScreenProps<RootStackParamList, 'LoginScreen'>;
-
-export function LoginScreen({ navigation }: StackProps) {
+export function LoginScreen({
+  navigation,
+}: AuthStackScreenProps<'LoginScreen'>) {
   const { control, handleSubmit, formState } = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
     defaultValues: {

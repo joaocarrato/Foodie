@@ -22,7 +22,7 @@ export function Screen({
   scrollable,
   canGoBack,
 }: ScreenProps) {
-  const { top, bottom } = useAppSafeArea();
+  const { top } = useAppSafeArea();
   const navigation = useNavigation();
 
   const Container = scrollable ? ScrollViewContainer : ViewContainer;

@@ -1,8 +1,6 @@
 import React from 'react';
 import { Screen } from '../../../components/Screen/Screen';
 import { Text } from '../../../components/Text/Text';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../routes/Routes';
 import { Icon } from '../../../components/Icon/Icon';
 import { Button } from '../../../components/Button/Button';
 import { useForm } from 'react-hook-form';
@@ -10,13 +8,12 @@ import { FormTextInput } from '../../../components/FormInput/FormTextInput';
 import { useResetNavigationSuccess } from '../../../hooks/useResetNavigationSuccess';
 import { signAddressSchema, SignAddressSchema } from './signAddressSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { AuthStackScreenProps } from '../../../routes/navigationType';
 
-type StackProps = NativeStackScreenProps<
-  RootStackParamList,
-  'SignAddressScreen'
->;
-
-export function SignAddressScreen({ navigation }: StackProps) {
+export function SignAddressScreen({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  navigation,
+}: AuthStackScreenProps<'SignAddressScreen'>) {
   const { reset } = useResetNavigationSuccess();
   const { control, handleSubmit, formState } = useForm<SignAddressSchema>({
     resolver: zodResolver(signAddressSchema),

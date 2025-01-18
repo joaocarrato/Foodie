@@ -1,15 +1,15 @@
 import React from 'react';
 import { Screen } from '../../../components/Screen/Screen';
 import { Text } from '../../../components/Text/Text';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../routes/Routes';
 import { Icon } from '../../../components/Icon/Icon';
 import { Box } from '../../../components/Box/Box';
 import { Button } from '../../../components/Button/Button';
+import { AuthStackScreenProps } from '../../../routes/navigationType';
 
-type StackProps = NativeStackScreenProps<RootStackParamList, 'SuccessScreen'>;
-
-export function SuccessScreen({ route, navigation }: StackProps) {
+export function SuccessScreen({
+  route,
+  navigation,
+}: AuthStackScreenProps<'SuccessScreen'>) {
   return (
     <Screen>
       <Box my="s24">

@@ -2,26 +2,24 @@ import React from 'react';
 import { Screen } from '../../../components/Screen/Screen';
 import { Text } from '../../../components/Text/Text';
 import { Icon } from '../../../components/Icon/Icon';
-import { TextInput } from '../../../components/TextInput/TextInput';
+
 import { Button } from '../../../components/Button/Button';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../routes/Routes';
+
 import { useResetNavigationSuccess } from '../../../hooks/useResetNavigationSuccess';
 import { useForm } from 'react-hook-form';
 import { FormTextInput } from '../../../components/FormInput/FormTextInput';
-import { EMAIL_REGEX } from '../../../components/FormInput/regex';
+
 import {
   forgotPasswordSchema,
   ForgotPasswordSchema,
 } from './forgotPasswordSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { AuthStackScreenProps } from '../../../routes/navigationType';
 
-type StackProps = NativeStackScreenProps<
-  RootStackParamList,
-  'ForgotPasswordScreen'
->;
-
-export function ForgotPasswordScreen({ navigation }: StackProps) {
+export function ForgotPasswordScreen({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  navigation,
+}: AuthStackScreenProps<'ForgotPasswordScreen'>) {
   const { reset } = useResetNavigationSuccess();
   const { control, handleSubmit, formState } = useForm<ForgotPasswordSchema>({
     resolver: zodResolver(forgotPasswordSchema),
@@ -30,6 +28,7 @@ export function ForgotPasswordScreen({ navigation }: StackProps) {
     },
     mode: 'onChange',
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function onSubmit(data: ForgotPasswordSchema) {
     reset({
       icon: {

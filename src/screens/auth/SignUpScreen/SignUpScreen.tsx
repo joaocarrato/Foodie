@@ -3,17 +3,16 @@ import { Screen } from '../../../components/Screen/Screen';
 import { Text } from '../../../components/Text/Text';
 import { Icon } from '../../../components/Icon/Icon';
 import { Button } from '../../../components/Button/Button';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../routes/Routes';
 import { useForm } from 'react-hook-form';
 import { FormTextInput } from '../../../components/FormInput/FormTextInput';
 import { FormPasswordInput } from '../../../components/FormInput/FormPasswordInput';
 import { signUpSchema, SignUpSchema } from './signUpSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { AuthStackScreenProps } from '../../../routes/navigationType';
 
-type StackProps = NativeStackScreenProps<RootStackParamList, 'SignUpScreen'>;
-
-export function SignUpScreen({ navigation }: StackProps) {
+export function SignUpScreen({
+  navigation,
+}: AuthStackScreenProps<'SignUpScreen'>) {
   const { control, handleSubmit, formState } = useForm<SignUpSchema>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -25,6 +24,7 @@ export function SignUpScreen({ navigation }: StackProps) {
     mode: 'onChange',
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function onSubmit(data: SignUpSchema) {
     navigation.navigate('SignAddressScreen');
   }
