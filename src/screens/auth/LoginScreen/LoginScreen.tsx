@@ -1,15 +1,20 @@
 import React from 'react';
-import { Screen } from '../../../components/Screen/Screen';
-import { Box } from '../../../components/Box/Box';
-import { Icon } from '../../../components/Icon/Icon';
-import { Text } from '../../../components/Text/Text';
-import { Button } from '../../../components/Button/Button';
-import { useForm } from 'react-hook-form';
-import { FormTextInput } from '../../../components/FormInput/FormTextInput';
-import { FormPasswordInput } from '../../../components/FormInput/FormPasswordInput';
-import { loginSchema, LoginSchema } from './loginSchema';
+
 import { zodResolver } from '@hookform/resolvers/zod';
-import { AuthStackScreenProps } from '../../../routes/navigationType';
+import { useForm } from 'react-hook-form';
+
+import {
+  Box,
+  Button,
+  FormPasswordInput,
+  FormTextInput,
+  Icon,
+  Screen,
+  Text,
+} from '@components';
+import { AuthStackScreenProps } from '@routes';
+
+import { loginSchema, LoginSchema } from './loginSchema';
 
 export function LoginScreen({
   navigation,

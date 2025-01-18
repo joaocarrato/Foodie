@@ -1,10 +1,7 @@
 import React from 'react';
-import { Screen } from '../../../components/Screen/Screen';
-import { Text } from '../../../components/Text/Text';
-import { Icon } from '../../../components/Icon/Icon';
-import { Box } from '../../../components/Box/Box';
-import { Button } from '../../../components/Button/Button';
-import { AuthStackScreenProps } from '../../../routes/navigationType';
+
+import { Box, Button, Icon, Screen, Text } from '@components';
+import { AuthStackScreenProps } from '@routes';
 
 export function SuccessScreen({
   route,

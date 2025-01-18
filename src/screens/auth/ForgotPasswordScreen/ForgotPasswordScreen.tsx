@@ -1,20 +1,16 @@
 import React from 'react';
-import { Screen } from '../../../components/Screen/Screen';
-import { Text } from '../../../components/Text/Text';
-import { Icon } from '../../../components/Icon/Icon';
 
-import { Button } from '../../../components/Button/Button';
-
-import { useResetNavigationSuccess } from '../../../hooks/useResetNavigationSuccess';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { FormTextInput } from '../../../components/FormInput/FormTextInput';
+
+import { Screen, Text, Icon, Button, FormTextInput } from '@components';
+import { useResetNavigationSuccess } from '@hooks';
+import { AuthStackScreenProps } from '@routes';
 
 import {
   forgotPasswordSchema,
   ForgotPasswordSchema,
 } from './forgotPasswordSchema';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { AuthStackScreenProps } from '../../../routes/navigationType';
 
 export function ForgotPasswordScreen({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

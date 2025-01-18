@@ -1,14 +1,13 @@
 import React from 'react';
-import { Screen } from '../../../components/Screen/Screen';
-import { Text } from '../../../components/Text/Text';
-import { Icon } from '../../../components/Icon/Icon';
-import { Button } from '../../../components/Button/Button';
-import { useForm } from 'react-hook-form';
-import { FormTextInput } from '../../../components/FormInput/FormTextInput';
-import { useResetNavigationSuccess } from '../../../hooks/useResetNavigationSuccess';
-import { signAddressSchema, SignAddressSchema } from './signAddressSchema';
+
 import { zodResolver } from '@hookform/resolvers/zod';
-import { AuthStackScreenProps } from '../../../routes/navigationType';
+import { useForm } from 'react-hook-form';
+
+import { Button, FormTextInput, Icon, Screen, Text } from '@components';
+import { useResetNavigationSuccess } from '@hooks';
+import { AuthStackScreenProps } from '@routes';
+
+import { signAddressSchema, SignAddressSchema } from './signAddressSchema';
 
 export function SignAddressScreen({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

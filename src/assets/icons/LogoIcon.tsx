@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Svg, {
   Path,
   G,
@@ -8,6 +9,7 @@ import Svg, {
   Use,
   Image,
 } from 'react-native-svg';
+
 import { ThemeColors } from '../../theme/theme';
 
 interface IconProps {

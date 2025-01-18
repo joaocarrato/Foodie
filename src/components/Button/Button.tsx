@@ -1,8 +1,9 @@
 import React from 'react';
-import { TouchableOpacityBox, TouchableOpacityBoxProps } from '../Box/Box';
-import { Text } from '../Text/Text';
+
 import { ThemeColors } from '../../theme/theme';
 import { ActivityIndicator } from '../ActivityIndicator/ActivityIndicator';
+import { TouchableOpacityBox, TouchableOpacityBoxProps } from '../Box/Box';
+import { Text } from '../Text/Text';
 
 type ButtonPresets = 'primary' | 'secondary';
 

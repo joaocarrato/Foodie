@@ -1,11 +1,15 @@
 import React from 'react';
-import { IconProps } from '../components/Icon/Icon';
+
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { ForgotPasswordScreen } from '../screens/auth/ForgotPasswordScreen/ForgotPasswordScreen';
-import { LoginScreen } from '../screens/auth/LoginScreen/LoginScreen';
-import { SignAddressScreen } from '../screens/auth/SignAddressScreen/SignAddressScreen';
-import { SignUpScreen } from '../screens/auth/SignUpScreen/SignUpScreen';
-import { SuccessScreen } from '../screens/auth/SuccessScreen/SuccessScreen';
+
+import { IconProps } from '@components';
+import {
+  ForgotPasswordScreen,
+  LoginScreen,
+  SignAddressScreen,
+  SignUpScreen,
+  SuccessScreen,
+} from '@screens';
 
 export type AuthStackParamList = {
   LoginScreen: undefined;
